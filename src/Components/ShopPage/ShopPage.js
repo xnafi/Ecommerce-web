@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import Cart from '../Cart/Cart'
 import SingleProduct from './SingleProduct'
 
 export default function ShopPage() {
@@ -16,17 +17,16 @@ export default function ShopPage() {
     const BuyNow = (products) => {
         const addToCart = [...cart, products]
         setCart(addToCart)
-        
     }
     return (
         <div className='grid grid-cols-4 gap-4 px-10 top-16 absolute z-10'>
-            <div className='col-span-3 grid grid-cols-3 gap-4 mt-10'>
+            <div className='col-span-3 grid grid-cols-3 gap-8 my-10'>
                 {
                     products.map(product => <SingleProduct key={product.id} product={product} BuyNow={BuyNow}></SingleProduct>)
                 }
             </div>
             <div className='bg-red-400 fixed right-0 w-80 h-full'>
-                <div><h1>Products {cart.length}</h1></div>
+                <Cart cart={cart}></Cart>
             </div>
 
         </div>
