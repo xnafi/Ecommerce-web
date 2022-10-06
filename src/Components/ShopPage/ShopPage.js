@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { addToDb, getStoredCart } from '../../utilities/fakedb'
 import Cart from '../Cart/Cart'
 import SingleProduct from './SingleProduct'
 
@@ -14,9 +15,34 @@ export default function ShopPage() {
                 setProducts(data)
             })
     }, [])
+
+    useEffect(() => {
+        const storedProducts = getStoredCart();
+        let cartProducts = []
+        for (const id in storedProducts) {
+            const addedProduct = products.find(pro => pro.id === id)
+            if (addedProduct) {
+                const quantity = storedProducts[id]
+                addedProduct.quantity = quantity
+                cartProducts.push(addedProduct)
+            }
+        }
+        setCart(cartProducts)
+    }, [products])
+
     const BuyNow = (products) => {
-        const addToCart = [...cart, products]
-        setCart(addToCart)
+        let newCart = [];
+        const exits = cart.find(product => product.id === products.id)
+        if (!exits) {
+            products.quantity = 1;
+            newCart = [...cart, products];
+        } else {
+            const rest = cart.filter(product => product.id !== products.id);
+            exits.quantity = exits.quantity + 1;
+            newCart = [...rest, exits];
+        }
+        setCart(newCart);
+        addToDb(products.id);
     }
     return (
         <div className='grid grid-cols-4 gap-4 px-10 top-16 absolute z-10'>

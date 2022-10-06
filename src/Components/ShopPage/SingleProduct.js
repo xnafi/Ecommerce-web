@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
+// import React, { useState } from 'react'
 import logo from '../../images/logo192.png'
 
 export default function SingleProduct({ product,BuyNow }) {
-    const [cart, setCart] = useState([])
+    // const [cart, setCart] = useState([])
     const { img, name, seller, price, ratings } = product;
     return (
         <div className="card bg-base-100 shadow-xl h-[508px]">
