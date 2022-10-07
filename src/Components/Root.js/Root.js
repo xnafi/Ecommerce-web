@@ -2,6 +2,7 @@
 import React from 'react'
 import { createBrowserRouter } from 'react-router-dom'
 import Main from '../../Layout/Main'
+import { ProductsAndCartLoader } from '../../Loaders/ProductsAndCartLoader'
 import About from '../About/About'
 import ErrorPage from '../ErrorPage/ErrorPage'
 import Inventory from '../Inventory/Inventory'
@@ -25,7 +26,7 @@ const Root = createBrowserRouter([
             {
                 path: 'orders',
                 element: <Orders />,
-                loader: () => fetch('product.json')
+                loader: ProductsAndCartLoader
 
             },
             {

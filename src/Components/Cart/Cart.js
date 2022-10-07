@@ -1,7 +1,6 @@
 import React from 'react'
 
 export default function Cart({ cart }) {
-    console.log(cart);
     let price = 0;
     let shipping = 0;
     let quantity = 0;
