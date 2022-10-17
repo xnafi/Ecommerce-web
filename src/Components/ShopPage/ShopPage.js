@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react'
-import { addToDb, getStoredCart } from '../../utilities/fakedb'
+import { Link } from 'react-router-dom'
+import { addToDb, deleteShoppingCart, getStoredCart } from '../../utilities/fakedb'
 import Cart from '../Cart/Cart'
 import SingleProduct from './SingleProduct'
 
 export default function ShopPage() {
     const [products, setProducts] = useState([])
     const [cart, setCart] = useState([])
+
 
     useEffect(() => {
         fetch('products.json')
@@ -43,6 +45,8 @@ export default function ShopPage() {
         setCart(newCart);
         addToDb(products.id);
     }
+
+
     return (
         <div className='grid grid-cols-4 gap-4 px-10 top-16 absolute z-10'>
             <div className='col-span-3 grid grid-cols-3 gap-8 my-10'>
@@ -51,9 +55,15 @@ export default function ShopPage() {
                 }
             </div>
             <div className='bg-red-400 fixed right-0 w-80 h-full'>
-                <Cart cart={cart}></Cart>
+                <Cart cart={cart}>
+                    <Link to='/orders'>
+                        <button className="px-6 py-2 font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-600 rounded-md hover:bg-blue-500 ">
+                            Review Order
+                        </button>
+                    </Link>
+                </Cart>
             </div>
 
-        </div>
+        </div >
     )
 }

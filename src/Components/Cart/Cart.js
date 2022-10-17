@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function Cart({ cart }) {
+export default function Cart({ cart, children, clearCart }) {
     let price = 0;
     let shipping = 0;
     let quantity = 0;
@@ -19,6 +19,7 @@ export default function Cart({ cart }) {
             <h5 className='font-bold'>Total Shipping Charge : {shipping}</h5>
             <h5 className='font-bold'>Tax : ${parseFloat(tax).toFixed(2)}</h5>
             <h5 className='font-bold text-xl'>Grand Total: {grandTotal}</h5>
+            {children}
         </div>
     )
 }
